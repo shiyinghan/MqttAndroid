@@ -9,19 +9,19 @@ The Mqtt Android Service is an MQTT client library for developing applications o
 **Step 1.** Add it in your root **build.gradle** at the end of repositories:
 
 ```groovy
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
 ```
 
 **Step 2.** Add the dependency:
 
 ```groovy
 dependencies {
-	        implementation 'com.github.shiyinghan:MqttAndroid:1.0.0'
-	}
+    implementation 'com.github.shiyinghan:MqttAndroid:1.0.0'
+}
 ```
 

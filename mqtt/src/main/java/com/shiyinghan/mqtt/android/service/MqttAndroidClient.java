@@ -1649,7 +1649,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
     synchronized void notifyOffline() {
         traceDebug(TAG, "Offline with client:" + getClientId() + '/' + getServerURI());
 
-        if (callback != null && !connectOptions.isCleanSession()) {
+        if (isConnected() && callback != null && !connectOptions.isCleanSession()) {
             Exception e = new Exception("Android offline");
             callback.connectionLost(e);
         }
