@@ -71,4 +71,5 @@ dependencies {
     androidTestImplementation deps.espresso
 
     implementation project(path: ':mqtt')
+//    implementation 'com.github.shiyinghan:MqttAndroid:1.0.0'
 }
