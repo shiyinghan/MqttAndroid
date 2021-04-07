@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0E6EB8</color>
+    <color name="colorPrimaryPressed">#0363A5</color>
+    <color name="colorPrimaryLight">#1E90FF</color>
+    <color name="colorPrimaryDisable">#717C85</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="common_button_disable_color">#979797</color>
+
+    <color name="common_button_dark_text_color">#2D3237</color>
+
+    <color name="common_layout_background_light_color">#F1EFF2</color>
+
+    <!-- common title layout -->
+    <color name="common_title_text_color">#2D3237</color>
+
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#727272</color>
+    <color name="dividerColor">#B6B6B6</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+    <color name="orange">#FF8008</color>
+    <color name="nav_color">#ffffff</color>
+    <color name="gray">#F5F5F5</color>
+    <color name="dark_gray">#E6E6E6</color>
+    <color name="material_bg">#F2F2F2</color>
+    <color name="pink">#FF4D4F</color>
+    <color name="shallow_gray">#666666</color>
+    <color name="ash_gray">#888888</color>
+    <color name="cancel_gray">#999999</color>
+    <color name="yellow_bg">#FFCC00</color>
+    <color name="light_gray">#FAFAFA</color>
+    <color name="green">#52C41A</color>
+    <color name="light_blue">#00F5FF</color>
+    <color name="line">#EEEEEE</color>
+    <color name="bg_grey">#F5F5F5</color>
+    <color name="title_grey">#FAFAFA</color>
+</resources>

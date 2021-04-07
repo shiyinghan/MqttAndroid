@@ -1,0 +1,136 @@
+// 统一处理库版本号
+
+ext.deps = [:]
+def versions = [:]
+versions.annotation = '1.1.0'
+versions.appcompat = "1.1.0"
+versions.arch_core = '1.1.1'
+versions.constraintlayout = '2.0.4'
+versions.fragment = '1.2.0'
+versions.recyclerview = "1.1.0"
+versions.room = '2.2.3'
+versions.lifcycle = '1.1.1'
+versions.junit = "4.12"
+versions.extjunit = "1.1.2"
+versions.espresso = "3.3.0"
+versions.legacy = "1.0.0"
+versions.cardview = "1.0.0"
+versions.material = "1.3.0"
+versions.multidex = "2.0.1"
+
+versions.rxjava2 = "2.2.18"
+versions.rx_android = "2.1.1"
+versions.rx_lifecycle = "2.2.2"
+versions.rx_relay = "2.1.1"
+
+versions.retrofit = "2.6.4"
+versions.okhttp3 = "3.12.9"
+
+versions.glide = "3.7.0"
+
+versions.android_gradle_plugin = '4.1.2'
+
+// loadMoreWrapper
+versions.load_more_wrapper = "1.7.0"
+
+// autosize
+versions.autosize = "1.2.0"
+
+// eventbus
+versions.eventbus = "3.2.0"
+
+//BaseRecyclerViewAdapterHelper
+versions.BaseRecyclerViewAdapterHelper = "3.0.4"
+
+//rxpermissions
+versions.rxpermissions = "0.11"
+
+//hutool
+versions.hutool = "4.6.8"
+
+//paho.mqtt
+versions.paho_mqtt = "1.2.5"
+
+def deps = [:]
+
+// support库
+def support = [:]
+support.annotations = "androidx.annotation:annotation:$versions.annotation"
+support.app_compat = "androidx.appcompat:appcompat:$versions.appcompat"
+support.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
+support.cardview = "androidx.cardview:cardview:$versions.cardview"
+support.design = "com.google.android.material:material:$versions.material"
+support.v4 = "androidx.legacy:legacy-support-v4:$versions.legacy"
+support.core_utils = "androidx.legacy:legacy-support-core-utils:$versions.legacy"
+support.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+support.fragment = "androidx.fragment:fragment:$versions.fragment"
+support.multidex = "androidx.multidex:multidex:$versions.multidex"
+deps.support = support
+
+//room相关库
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
+room.testing = "androidx.room:room-testing:$versions.room"
+deps.room = room
+
+//glide库
+deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
+
+// rxjava
+deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
+deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+deps.rx_lifecycle = "com.trello.rxlifecycle2:rxlifecycle:$versions.rx_lifecycle"
+deps.rx_lifecycle_components = "com.trello.rxlifecycle2:rxlifecycle-components:$versions.rx_lifecycle"
+deps.rx_lifecycle_android_lifecycle = "com.trello.rxlifecycle2:rxlifecycle-android-lifecycle:$versions.rx_lifecycle"
+deps.rx_relay = "com.jakewharton.rxrelay2:rxrelay:$versions.rx_relay"
+
+
+// gradle插件
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+
+// junit
+deps.junit = "junit:junit:$versions.junit"
+deps.extjunit = "androidx.test.ext:junit:$versions.extjunit"
+//espresso
+deps.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
+
+// retrofit
+deps.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+deps.okhttp3 = "com.squareup.okhttp3:okhttp:$versions.okhttp3"
+deps.okhttp3_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp3"
+deps.retrofit_converter_gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+deps.retrofti_adapter_rxjava = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+
+ext.deps = deps
+// load more wrapper
+deps.load_more_wrapper = "com.github.nukc:loadmorewrapper:$versions.load_more_wrapper"
+
+// androidAutoSize
+deps.autosize = "me.jessyan:autosize:$versions.autosize"
+
+// eventbus
+deps.eventbus = "org.greenrobot:eventbus:$versions.eventbus"
+
+// BaseRecyclerViewAdapterHelper
+deps.BaseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.BaseRecyclerViewAdapterHelper"
+
+//rxpermissions
+deps.rxpermissions = "com.github.tbruyelle:rxpermissions:$versions.rxpermissions"
+
+//hutool
+deps.hutool = "cn.hutool:hutool-all:$versions.hutool"
+
+// paho.client.mqttv3
+deps.paho_client_mqttv3 = "org.eclipse.paho:org.eclipse.paho.client.mqttv3:$versions.paho_mqtt"
+
+// build
+def build_versions = [:]
+build_versions.min_sdk = 21
+build_versions.target_sdk = 30
+build_versions.build_tools = "30.0.3"
+
+
+ext.build_versions = build_versions
+ext.android_gradle_plugin = versions.android_gradle_plugin

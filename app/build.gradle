@@ -1,0 +1,74 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        applicationId "com.shiyinghan.mqttdemo"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "0.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation deps.support.v4
+    implementation deps.support.multidex
+
+    //support
+    implementation deps.support.app_compat
+    implementation deps.support.recyclerview
+    implementation deps.support.design
+    implementation deps.support.v4
+    implementation deps.support.constraint_layout
+    implementation deps.support.fragment
+    //room
+    implementation deps.room.runtime
+    annotationProcessor deps.room.compiler
+    implementation deps.room.rxjava2
+    //rxJava
+    implementation deps.rxjava2
+    implementation deps.rx_android
+    implementation deps.rx_lifecycle
+    implementation deps.rx_lifecycle_components
+    implementation deps.rx_lifecycle_android_lifecycle
+    implementation deps.rx_relay
+    //eventbus
+    implementation deps.eventbus
+    //autosize
+    implementation deps.autosize
+    //BaseRecyclerViewAdapterHelper
+    implementation deps.BaseRecyclerViewAdapterHelper
+
+    annotationProcessor deps.room.compiler
+
+    // test
+    testImplementation deps.junit
+    androidTestImplementation deps.extjunit
+    androidTestImplementation deps.espresso
+
+    implementation project(path: ':mqtt')
+}

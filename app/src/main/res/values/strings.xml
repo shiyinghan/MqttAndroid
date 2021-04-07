@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">MqttAndroid</string>
+
+    <string-array name="qos_options">
+        <item name="qos_0">0</item>
+        <item name="qos_1">1</item>
+        <item name="qos_2">2</item>
+    </string-array>
+
+    <string name="confirm_button">Confirm</string>
+
+    <string name="dialog_positive_button">OK</string>
+    <string name="dialog_negative_button">Cancel</string>
+
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+
+    <string name="notification_channel_name">MQTT Test Channel</string>
+    <string name="notification_channel_description">MQTT Test Channel</string>
+
+    <string name="connection_list_title">Connection List</string>
+    <string name="add_connection_button">Add Connection</string>
+    <string name="delete_connection_tip">Delete this mqttConnection?</string>
+
+    <string name="add_connection_title">Add Connection</string>
+    <string name="edit_connection_title">Edit Connection</string>
+    <string name="connection_general_label" translatable="false">General</string>
+    <string name="connection_client_id_label" translatable="false">Client ID</string>
+    <string name="connection_client_id_default" translatable="false">AndroidClient</string>
+    <string name="connection_server_label" translatable="false">Server</string>
+    <string name="connection_server_default" translatable="false">mqtt.eclipseprojects.io</string>
+    <string name="connection_port_label" translatable="false">Port</string>
+    <string name="connection_clean_session_label" translatable="false">Clean Session</string>
+    <string name="connection_advanced_label" translatable="false">Advanced</string>
+    <string name="connection_username_label" translatable="false">Username</string>
+    <string name="connection_password_label" translatable="false">Password</string>
+    <string name="connection_timeout_label" translatable="false">Timeout</string>
+    <string name="connection_keep_alive_label" translatable="false">Keep Alive</string>
+    <string name="connection_tls_server_key_label" translatable="false">Server TLS Key</string>
+    <string name="connection_tls_client_key_label" translatable="false">Client TLS Key</string>
+    <string name="connection_lwt_label" translatable="false">Last Will &amp; Testament</string>
+    <string name="connection_lwt_topic_label" translatable="false">Topic</string>
+    <string name="connection_lwt_message_label" translatable="false">Message</string>
+    <string name="connection_lwt_retain_label" translatable="false">Retain</string>
+    <string name="connection_lwt_qos_label" translatable="false">QoS</string>
+
+    <string name="connection_client_id_input_tip">Please enter a client id</string>
+    <string name="connection_server_input_tip">Please enter a server</string>
+    <string name="connection_port_input_tip">Please enter a port</string>
+
+    <string name="notify_message_title">MQTT Message Received</string>
+    <string name="notify_message_content">%1$s has received %2$s on topic %3$s</string>
+    <string name="notify_connection_lost_title">MQTT Client Has Lost Connection</string>
+    <string name="notify_connection_lost_content">%1$s has lost Connection to %2$s</string>
+
+    <string name="toast_publish_success">Published message: %1$s to topic: %2$s</string>
+    <string name="toast_publish_failed">Failed to publish message: %1$s to topic: %2$s</string>
+    <string name="toast_subscribe_success">Subscribed to %1$s</string>
+    <string name="toast_subscribe_failed">Failed to subscribe to %1$s</string>
+    <string name="toast_unsubscribe_success">Unsubscribed to %1$s</string>
+    <string name="toast_unsubscribe_failed">Failed to unsubscribe to %1$s</string>
+
+    <string name="connection_history_tab">History</string>
+    <string name="connection_publish_tab">Publish</string>
+    <string name="connection_subscribe_tab">Subscribe</string>
+
+    <string name="history_clear_button">Clear</string>
+    <string name="publish_message_button">Publish</string>
+    <string name="subscription_add_button">Add Subscription</string>
+
+    <!-- Strings for History List Fragment -->
+    <string name="history_list_message_placeholder">Example application</string>
+    <string name="history_list_topic_fmt">Topic: %1$s </string>
+    <string name="history_list_time_fmt">Time: %1$s</string>
+
+    <!-- Strings for Publish Message Fragment -->
+    <string name="publish_message_topic_hint">/test</string>
+    <string name="publish_message_message_hint">Hello world!</string>
+    <string name="publish_message_topic_input_tip">Please enter a topic</string>
+    <string name="publish_message_message_input_tip">Please enter a message</string>
+
+    <!-- Strings for Subscription List Fragment -->
+    <string name="subscription_topic_label">Topic</string>
+    <string name="subscription_qos_label">QoS</string>
+    <string name="subscription_notify_label">Show Notification</string>
+    <string name="subscription_ok_button">OK</string>
+    <string name="subscription_cancel_button">Cancel</string>
+    <string name="subscription_topic_input_tip">Please enter a topic</string>
+    <string name="subscription_list_topic_text">Topic: %1$s</string>
+    <string name="subscription_list_qos_text">QoS: %1$d</string>
+    <string name="subscription_list_notify_text">Notification: %1$s</string>
+
+</resources>

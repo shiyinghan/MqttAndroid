@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">MqttAndroid</string>
+
+    <string-array name="qos_options">
+        <item name="qos_0">0</item>
+        <item name="qos_1">1</item>
+        <item name="qos_2">2</item>
+    </string-array>
+
+    <string name="confirm_button">确认</string>
+
+    <string name="dialog_positive_button">是</string>
+    <string name="dialog_negative_button">否</string>
+
+    <string name="enabled">开启</string>
+    <string name="disabled">关闭</string>
+
+    <string name="notification_channel_name">MQTT测试渠道</string>
+    <string name="notification_channel_description">MQTT测试渠道</string>
+
+    <string name="connection_list_title">连接列表</string>
+    <string name="add_connection_button">添加连接</string>
+    <string name="delete_connection_tip">确定删除该连接?</string>
+
+    <string name="add_connection_title">添加连接</string>
+    <string name="edit_connection_title">修改连接</string>
+
+    <string name="connection_client_id_input_tip">请输入Client ID</string>
+    <string name="connection_server_input_tip">请输入Server</string>
+    <string name="connection_port_input_tip">请输入Port</string>
+
+    <string name="notify_message_title">收到一条MQTT消息</string>
+    <string name="notify_message_content">客户端: %1$s 接收到消息: %2$s (订阅主题:  %3$s)</string>
+    <string name="notify_connection_lost_title">MQTT客户端的连接已断开</string>
+    <string name="notify_connection_lost_content">%1$s和%2$s之间的连接已断开</string>
+
+    <string name="toast_publish_success">消息: %1$s (主题: %2$s)发布成功</string>
+    <string name="toast_publish_failed">消息: %1$s (主题: %2$s)发布失败</string>
+    <string name="toast_subscribe_success">主题:  %1$s 订阅成功</string>
+    <string name="toast_subscribe_failed">主题:  %1$s 订阅失败</string>
+    <string name="toast_unsubscribe_success">主题:  %1$s 取消订阅成功</string>
+    <string name="toast_unsubscribe_failed">主题:  %1$s 取消订阅失败</string>
+
+    <string name="connection_history_tab">历史列表</string>
+    <string name="connection_publish_tab">发布</string>
+    <string name="connection_subscribe_tab">订阅</string>
+
+    <string name="history_clear_button">清空</string>
+    <string name="publish_message_button">发布</string>
+    <string name="subscription_add_button">新增订阅</string>
+
+    <!-- Strings for History List Fragment -->
+    <string name="history_list_message_placeholder">测试占位符</string>
+    <string name="history_list_topic_fmt">Topic: %1$s </string>
+    <string name="history_list_time_fmt">Time: %1$s</string>
+
+    <!-- Strings for Publish Message Fragment -->
+    <string name="publish_message_topic_hint">测试主题</string>
+    <string name="publish_message_message_hint">测试消息体</string>
+    <string name="publish_message_topic_input_tip">请输入主题</string>
+    <string name="publish_message_message_input_tip">请输入消息体</string>
+
+    <!-- Strings for Subscription List Fragment -->
+    <string name="subscription_topic_label">Topic</string>
+    <string name="subscription_qos_label">QoS</string>
+    <string name="subscription_notify_label">显示通知</string>
+    <string name="subscription_ok_button">是</string>
+    <string name="subscription_cancel_button">否</string>
+    <string name="subscription_topic_input_tip">请输入主题</string>
+    <string name="subscription_list_topic_text">Topic: %1$s</string>
+    <string name="subscription_list_qos_text">QoS: %1$d</string>
+    <string name="subscription_list_notify_text">通知: %1$s</string>
+
+</resources>

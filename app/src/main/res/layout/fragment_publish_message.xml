@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="30pt"
+    tools:context=".module.fragment.PublishMessageFragment">
+
+    <LinearLayout
+        android:id="@+id/llTopicGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvTopicLabel"
+            style="@style/textFieldLabel"
+            android:text="@string/connection_lwt_topic_label" />
+
+        <EditText
+            android:id="@+id/etTopic"
+            style="@style/textFieldEditText"
+            android:hint="@string/publish_message_topic_hint"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vDivider1"
+        style="@style/Divider"
+        android:layout_below="@+id/llTopicGroup" />
+
+    <LinearLayout
+        android:id="@+id/llMessageGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vDivider1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvMessageLabel"
+            style="@style/textFieldLabel"
+            android:text="@string/connection_lwt_message_label" />
+
+        <EditText
+            android:id="@+id/etMessage"
+            style="@style/textFieldEditText"
+            android:hint="@string/publish_message_message_hint"
+            android:inputType="textMultiLine"
+            android:lines="4" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vDivider2"
+        style="@style/Divider"
+        android:layout_below="@+id/llMessageGroup" />
+
+    <LinearLayout
+        android:id="@+id/llQosGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vDivider2"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvQosLabel"
+            style="@style/textFieldLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/connection_lwt_qos_label" />
+
+        <Spinner
+            android:id="@+id/spinnerQos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/qos_options" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vDivider3"
+        style="@style/Divider"
+        android:layout_below="@+id/llQosGroup" />
+
+    <Switch
+        android:id="@+id/switchRetain"
+        style="@style/Switch"
+        android:layout_below="@+id/vDivider3"
+        android:checked="false"
+        android:text="@string/connection_lwt_retain_label" />
+
+    <Button
+        android:id="@+id/btnPublish"
+        style="@style/BottomButton"
+        android:text="@string/publish_message_button" />
+
+</RelativeLayout>

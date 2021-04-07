@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="afterDescendants"
+    android:padding="10pt">
+
+    <ImageView
+        android:id="@+id/ivSubscriptionItemIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="6pt"
+        android:src="@drawable/ic_topic"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvSubscriptionItemTopic"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/ivSubscriptionItemDelete"
+        android:layout_toRightOf="@id/ivSubscriptionItemIcon"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:textSize="15pt"
+        tools:text="@string/subscription_list_topic_text" />
+
+    <TextView
+        android:id="@+id/tvSubscriptionItemQos"
+        android:layout_width="100pt"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivSubscriptionItemIcon"
+        android:layout_toRightOf="@id/ivSubscriptionItemIcon"
+        android:textSize="13pt"
+        tools:text="@string/subscription_list_qos_text" />
+
+    <TextView
+        android:id="@+id/tvSubscriptionItemShowNotification"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivSubscriptionItemIcon"
+        android:layout_toRightOf="@id/tvSubscriptionItemQos"
+        android:text="@string/subscription_list_notify_text"
+        android:textSize="13pt" />
+
+    <ImageView
+        android:id="@+id/ivSubscriptionItemDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="6pt"
+        android:src="@drawable/ic_baseline_delete_24"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>

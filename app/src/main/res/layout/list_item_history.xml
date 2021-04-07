@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="10pt">
+
+    <TextView
+        android:id="@+id/tvHistoryItemMessage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:text="@string/history_list_message_placeholder"
+        android:textSize="14pt" />
+
+    <TextView
+        android:id="@+id/tvHistoryItemTopic"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvHistoryItemMessage"
+        android:layout_alignParentLeft="true"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="@string/history_list_topic_fmt"
+        android:textSize="12pt" />
+
+    <TextView
+        android:id="@+id/tvHistoryItemTime"
+        android:layout_width="180pt"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvHistoryItemMessage"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:text="@string/history_list_time_fmt"
+        android:textSize="12pt" />
+
+</RelativeLayout>

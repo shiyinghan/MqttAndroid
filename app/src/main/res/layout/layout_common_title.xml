@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlCommonTitleLayout"
+    android:layout_width="match_parent"
+    android:layout_height="56pt"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/ivTitleBack"
+        android:layout_width="23.33pt"
+        android:layout_height="30pt"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="6.67pt"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_title_back_white" />
+
+    <TextView
+        android:id="@+id/tvTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/white"
+        android:textSize="16pt"
+        tools:text="" />
+
+</RelativeLayout>

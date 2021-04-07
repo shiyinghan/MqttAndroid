@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50pt"
+    android:clickable="true"
+    android:descendantFocusability="afterDescendants"
+    tools:ignore="UseCompoundDrawables">
+
+    <TextView
+        android:id="@+id/tvConnectionRowTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20pt"
+        android:layout_toLeftOf="@id/ivConnectionRowEditIcon"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="13pt"
+        android:textStyle="bold"
+        tools:text="Hello world!" />
+
+    <ImageView
+        android:id="@+id/ivConnectionRowEditIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5pt"
+        android:layout_toLeftOf="@id/ivConnectionRowDeleteIcon"
+        android:clickable="true"
+        android:padding="10pt"
+        android:src="@drawable/ic_baseline_edit_24"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/ivConnectionRowDeleteIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10pt"
+        android:clickable="true"
+        android:padding="10pt"
+        android:src="@drawable/ic_baseline_delete_24"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>

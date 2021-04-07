@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentLeft="true">
+
+    <include
+        android:id="@+id/layoutHeader"
+        layout="@layout/layout_common_title" />
+
+    <ScrollView
+        android:id="@+id/svBody"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btnConfirm"
+        android:layout_below="@id/layoutHeader"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--                    General Settings                     -->
+
+            <TextView
+                android:id="@+id/tvGeneralHeader"
+                style="@style/HeaderText"
+                android:text="@string/connection_general_label" />
+
+            <LinearLayout
+                android:id="@+id/llClientIdGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvClientIdLabel"
+                    style="@style/textFieldLabel"
+                    android:text="@string/connection_client_id_label" />
+
+                <EditText
+                    android:id="@+id/etClientId"
+                    style="@style/textFieldEditText"
+                    android:inputType="text"
+                    android:text="@string/connection_client_id_default" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vDivider1"
+                style="@style/Divider" />
+
+            <LinearLayout
+                android:id="@+id/llServerGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvServerLabel"
+                    style="@style/textFieldLabel"
+                    android:text="@string/connection_server_label" />
+
+                <EditText
+                    android:id="@+id/etServer"
+                    style="@style/textFieldEditText"
+                    android:inputType="text"
+                    android:text="@string/connection_server_default" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vDivider2"
+                style="@style/Divider" />
+
+            <LinearLayout
+                android:id="@+id/llPortGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPortLabel"
+                    style="@style/textFieldLabel"
+                    android:text="@string/connection_port_label" />
+
+                <EditText
+                    android:id="@+id/etPort"
+                    style="@style/textFieldEditText"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:text="@integer/default_port" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vDivider3"
+                style="@style/Divider" />
+
+            <Switch
+                android:id="@+id/switchCleanSession"
+                style="@style/Switch"
+                android:text="@string/connection_clean_session_label" />
+
+            <!--                    Advanced Settings                    -->
+            <!--                    General Settings                     -->
+
+            <TextView
+                android:id="@+id/tvAdvancedHeader"
+                style="@style/HeaderText"
+                android:text="@string/connection_advanced_label" />
+
+            <LinearLayout
+                android:id="@+id/llUsernameGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvUsernameLabel"
+                    style="@style/textFieldLabel"
+                    android:text="@string/connection_username_label" />
+
+                <EditText
+                    android:id="@+id/etUsername"
+                    style="@style/textFieldEditText"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vDivider4"
+                style="@style/Divider" />
+
+            <LinearLayout
+                android:id="@+id/llPasswordGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvPasswordLabel"
+                    style="@style/textFieldLabel"
+                    android:text="@string/connection_password_label" />
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    style="@style/textFieldEditText"
+                    android:inputType="text"
+                    tools:ignore="TextFields" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vDivider5"
+                style="@style/Divider" />
+
+            <LinearLayout
+                android:id="@+id/llTimeoutGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvTimeoutLabel"
+                    style="@style/textFieldLabel"
+                    android:text="@string/connection_timeout_label" />
+
+                <EditText
+                    android:id="@+id/etTimeout"
+                    style="@style/textFieldEditText"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:text="@integer/default_timeout" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vDivider7"
+                style="@style/Divider" />
+
+            <LinearLayout
+                android:id="@+id/llKeepAliveGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvKeepAliveLabel"
+                    style="@style/textFieldLabel"
+                    android:text="@string/connection_keep_alive_label" />
+
+                <EditText
+                    android:id="@+id/etKeepAlive"
+                    style="@style/textFieldEditText"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:text="@integer/default_keep_alive" />
+
+            </LinearLayout>
+
+            <!-- Last Will Testament -->
+
+            <TextView
+                android:id="@+id/tvLwtHeader"
+                style="@style/HeaderText"
+                android:text="@string/connection_lwt_label" />
+
+            <LinearLayout
+                android:id="@+id/llLwtTopicGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvLwtTopicLabel"
+                    style="@style/textFieldLabel"
+                    android:text="@string/connection_lwt_topic_label" />
+
+                <EditText
+                    android:id="@+id/etLwtTopic"
+                    style="@style/textFieldEditText"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vDivider8"
+                style="@style/Divider" />
+
+            <LinearLayout
+                android:id="@+id/llLwtMessageGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvLwtMessageLabel"
+                    style="@style/textFieldLabel"
+                    android:text="@string/connection_lwt_message_label" />
+
+                <EditText
+                    android:id="@+id/etLwtMessage"
+                    style="@style/textFieldEditText"
+                    android:inputType="textMultiLine"
+                    android:lines="4" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vDivider9"
+                style="@style/Divider" />
+
+            <LinearLayout
+                android:id="@+id/llLwtQosGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvLwtQosLabel"
+                    style="@style/textFieldLabel"
+                    android:text="@string/connection_lwt_qos_label" />
+
+                <Spinner
+                    android:id="@+id/spinnerLwtQos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/qos_options" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vDivider10"
+                style="@style/Divider" />
+
+            <Switch
+                android:id="@+id/switchLwtRetain"
+                style="@style/Switch"
+                android:text="@string/connection_lwt_retain_label" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40pt" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnConfirm"
+        style="@style/BottomButton"
+        android:text="@string/confirm_button" />
+</RelativeLayout>
+
+
+

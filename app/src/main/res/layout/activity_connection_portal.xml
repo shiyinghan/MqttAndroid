@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".module.activity.ConnectionPortalActivity">
+
+    <include
+        android:id="@+id/layoutHeader"
+        layout="@layout/layout_common_title" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tlConnectionPortalTabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutHeader"
+        app:tabIndicatorColor="@color/colorPrimary"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpConnectionPortalContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tlConnectionPortalTabs" />
+
+    <FrameLayout
+        android:id="@+id/flConnectionConnect"
+        android:layout_width="50pt"
+        android:layout_height="50pt"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="30pt"
+        android:layout_marginBottom="60pt">
+
+        <com.shiyinghan.mqttdemo.view.PointToLineRotateView
+            android:id="@+id/vConnectionConnectingBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/vConnectionActiveBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3pt"
+            android:background="@drawable/bg_connect_icon_active"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/vConnectionInActiveBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3pt"
+            android:background="@drawable/bg_connect_icon_inactive" />
+
+        <ImageView
+            android:layout_width="30pt"
+            android:layout_height="30pt"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_link_24" />
+    </FrameLayout>
+
+</RelativeLayout>
