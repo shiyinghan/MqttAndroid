@@ -27,7 +27,7 @@ import org.eclipse.paho.client.mqttv3.internal.ClientComms;
  *
  * @see MqttPingSender
  */
-class AlarmPingSender implements MqttPingSender {
+public class AlarmPingSender implements MqttPingSender {
     // Identifier for Intents, log messages, etc..
     private static final String TAG = AlarmPingSender.class.getSimpleName();
 

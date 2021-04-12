@@ -350,9 +350,11 @@ public class MqttAndroidClient implements IMqttAsyncClient {
                 }
             };
 
+            // if myClient is null, then create a new connection
             if (myClient == null) {
-                // if myClient is null, then create a new connection
-                alarmPingSender = new AlarmPingSender(mqttService);
+                if (alarmPingSender == null) {
+                    alarmPingSender = new AlarmPingSender(mqttService);
+                }
                 myClient = new MqttAsyncClient(serverURI, clientId, persistence, alarmPingSender);
                 myClient.setCallback(new MqttCallbackExtendedAndroid());
             }
@@ -1722,6 +1724,10 @@ public class MqttAndroidClient implements IMqttAsyncClient {
         if (wakelock != null && wakelock.isHeld()) {
             wakelock.release();
         }
+    }
+
+    public void setAlarmPingSender(AlarmPingSender alarmPingSender) {
+        this.alarmPingSender = alarmPingSender;
     }
 
     /**

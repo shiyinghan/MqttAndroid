@@ -15,6 +15,3 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
-
--keep class org.eclipse.paho.client.mqttv3.internal.* { *; }
--keep class org.eclipse.paho.client.mqttv3.spi.* { *; }
