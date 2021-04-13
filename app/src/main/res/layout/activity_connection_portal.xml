@@ -32,7 +32,7 @@
         android:layout_marginRight="30pt"
         android:layout_marginBottom="60pt">
 
-        <com.shiyinghan.mqttdemo.view.PointToLineRotateView
+        <com.shiyinghan.mqtt.demo.view.PointToLineRotateView
             android:id="@+id/vConnectionConnectingBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

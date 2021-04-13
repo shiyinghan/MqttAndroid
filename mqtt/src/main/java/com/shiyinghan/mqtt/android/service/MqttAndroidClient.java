@@ -36,8 +36,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -81,7 +79,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
     private final String clientId;
     private MqttClientPersistence persistence = null;
     private MqttConnectOptions connectOptions = new MqttConnectOptions();
-    private MqttTokenAndroid connectToken;
+    private MqttAndroidToken connectToken;
 
     // The MqttCallback provided by the application
     private MqttCallback callback;
@@ -95,12 +93,6 @@ public class MqttAndroidClient implements IMqttAsyncClient {
     private AlarmPingSender alarmPingSender = null;
 
     private boolean needReconnect = false;
-
-    /**
-     * Saved MqttTokenAndroid of published messages ,
-     * so we can handle "deliveryComplete" callbacks from the mqttClient
-     */
-    private Map<IMqttActionListener, MqttTokenAndroid> tokenAndroidMap = new ConcurrentHashMap<>();
 
     private PowerManager.WakeLock wakelock = null;
     private String wakeLockTag = null;
@@ -274,7 +266,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
     @Override
     public IMqttToken connect(MqttConnectOptions options, Object userContext, IMqttActionListener callback) throws MqttException, MqttSecurityException {
 
-        MqttTokenAndroid token = new MqttTokenAndroid(this, userContext, callback);
+        MqttAndroidToken token = new MqttAndroidToken(this, userContext, callback);
 
         if (options == null) {
             connectOptions = new MqttConnectOptions();
@@ -356,7 +348,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
                     alarmPingSender = new AlarmPingSender(mqttService);
                 }
                 myClient = new MqttAsyncClient(serverURI, clientId, persistence, alarmPingSender);
-                myClient.setCallback(new MqttCallbackExtendedAndroid());
+                myClient.setCallback(new MyMqttCallback());
             }
 
             traceDebug(TAG, "Do Real connect!");
@@ -475,7 +467,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
     @Override
     public IMqttToken disconnect(Object userContext, IMqttActionListener callback) throws MqttException {
         traceDebug(TAG, "Disconnecting");
-        MqttTokenAndroid token = new MqttTokenAndroid(this, userContext, callback);
+        MqttAndroidToken token = new MqttAndroidToken(this, userContext, callback);
 
         needReconnect = false;
 
@@ -550,7 +542,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
     @Override
     public IMqttToken disconnect(long quiesceTimeout, Object userContext, IMqttActionListener callback) throws MqttException {
         traceDebug(TAG, "Disconnecting");
-        MqttTokenAndroid token = new MqttTokenAndroid(this, userContext, callback);
+        MqttAndroidToken token = new MqttAndroidToken(this, userContext, callback);
 
         needReconnect = false;
 
@@ -588,7 +580,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
      *
      * @param token
      */
-    private void doAfterDisconnectSuccess(MqttTokenAndroid token) {
+    private void doAfterDisconnectSuccess(MqttAndroidToken token) {
         if (token != null) {
             token.notifyComplete();
         }
@@ -602,7 +594,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
      *
      * @param token
      */
-    private void doAfterDisconnectFail(MqttTokenAndroid token, Throwable e) {
+    private void doAfterDisconnectFail(MqttAndroidToken token, Throwable e) {
         if (token != null) {
             token.notifyFailure(e);
         }
@@ -729,7 +721,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
         MqttMessage message = new MqttMessage(payload);
         message.setQos(qos);
         message.setRetained(retained);
-        MqttTokenAndroid token = new MqttTokenAndroid(this, userContext, callback);
+        MqttAndroidToken token = new MqttAndroidToken(this, userContext, callback);
 
         IMqttDeliveryToken sendToken = null;
 
@@ -749,7 +741,6 @@ public class MqttAndroidClient implements IMqttAsyncClient {
             };
 
             try {
-                setTokenAndroidMap(listener, token);
                 sendToken = myClient.publish(topic, payload, qos, retained,
                         userContext, listener);
             } catch (Exception e) {
@@ -866,7 +857,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
         String traceMsgSuffix = " : ({ topic: " + topic + "},{ message: " + message + "},{ userContext: " + userContext + "}";
         traceDebug(TAG, "Publishing" + traceMsgSuffix);
 
-        MqttTokenAndroid token = new MqttTokenAndroid(this, userContext, callback);
+        MqttAndroidToken token = new MqttAndroidToken(this, userContext, callback);
 
         IMqttDeliveryToken sendToken = null;
 
@@ -885,7 +876,6 @@ public class MqttAndroidClient implements IMqttAsyncClient {
                 }
             };
             try {
-                setTokenAndroidMap(listener, token);
                 sendToken = myClient.publish(topic, message, userContext, listener);
             } catch (Exception e) {
                 traceException(TAG, e.getMessage(), e);
@@ -942,7 +932,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
         String traceMsgSuffix = " : ({ topicFilter: " + topicFilter + "},{ qos: " + qos + "},{ userContext: " + userContext + "}";
         traceDebug(TAG, "Subscribing" + traceMsgSuffix);
 
-        MqttTokenAndroid token = new MqttTokenAndroid(this, userContext,
+        MqttAndroidToken token = new MqttAndroidToken(this, userContext,
                 callback, new String[]{topicFilter});
 
         if (myClient != null) {
@@ -1129,7 +1119,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
         String traceMsgSuffix = " :  ({ topicFilters: " + Arrays.toString(topicFilters) + "},{ qos: " + Arrays.toString(qos) + "},{ userContext : " + userContext + "}";
         traceDebug(TAG, "Subscribing" + traceMsgSuffix);
 
-        MqttTokenAndroid token = new MqttTokenAndroid(this, userContext, callback, topicFilters);
+        MqttAndroidToken token = new MqttAndroidToken(this, userContext, callback, topicFilters);
 
         if (myClient != null) {
             IMqttActionListener listener = new IMqttActionListener() {
@@ -1255,7 +1245,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
         String traceMsgSuffix = " :  ({ topicFilters: " + Arrays.toString(topicFilters) + "},{ qos: " + Arrays.toString(qos) + "},{ userContext: " + userContext + "}";
         traceDebug(TAG, "Subscribing" + traceMsgSuffix);
 
-        MqttTokenAndroid token = new MqttTokenAndroid(this, userContext, callback, topicFilters);
+        MqttAndroidToken token = new MqttAndroidToken(this, userContext, callback, topicFilters);
 
         if (myClient != null) {
             IMqttActionListener listener = new IMqttActionListener() {
@@ -1271,8 +1261,14 @@ public class MqttAndroidClient implements IMqttAsyncClient {
                     token.notifyFailure(exception);
                 }
             };
+
+            IMqttMessageListener[] newMsgListeners = new IMqttMessageListener[messageListeners.length];
+            for (int i = 0; i < messageListeners.length; i++) {
+                newMsgListeners[i] = new MqttAndroidMessageListener(messageListeners[i]);
+            }
+
             try {
-                myClient.subscribe(topicFilters, qos, userContext, listener, messageListeners);
+                myClient.subscribe(topicFilters, qos, userContext, listener, newMsgListeners);
             } catch (Exception e) {
                 traceException(TAG, e.getMessage(), e);
                 token.notifyFailure(e);
@@ -1336,7 +1332,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
         String traceMsgSuffix = " : ({ topicFilter: " + topicFilter + "},{ userContext: " + userContext + "})";
         traceDebug(TAG, "Unsubscribing" + traceMsgSuffix);
 
-        MqttTokenAndroid token = new MqttTokenAndroid(this, userContext, callback);
+        MqttAndroidToken token = new MqttAndroidToken(this, userContext, callback);
 
         if ((myClient != null) && (myClient.isConnected())) {
             IMqttActionListener listener = new IMqttActionListener() {
@@ -1407,7 +1403,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
         String traceMsgSuffix = " : ({ topicFilter: " + Arrays.toString(topicFilters) + "},{ userContext: " + userContext + "})";
         traceDebug(TAG, "Unsubscribing" + traceMsgSuffix);
 
-        MqttTokenAndroid token = new MqttTokenAndroid(this, userContext, callback);
+        MqttAndroidToken token = new MqttAndroidToken(this, userContext, callback);
 
         if (myClient != null) {
             IMqttActionListener listener = new IMqttActionListener() {
@@ -1469,7 +1465,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
      */
     @Override
     public void setCallback(MqttCallback callback) {
-        this.callback = callback;
+        this.callback = new MqttAndroidCallback(callback);
     }
 
     /**
@@ -1694,17 +1690,6 @@ public class MqttAndroidClient implements IMqttAsyncClient {
     }
 
     /**
-     * Store MqttTokenAndroid of published message so we can handle "deliveryComplete"
-     * callbacks from the mqttClient
-     *
-     * @param listener
-     * @param androidToken
-     */
-    private void setTokenAndroidMap(IMqttActionListener listener, MqttTokenAndroid androidToken) {
-        tokenAndroidMap.put(listener, androidToken);
-    }
-
-    /**
      * Acquires a partial wake lock for this client
      */
     private void acquireWakeLock() {
@@ -1804,12 +1789,12 @@ public class MqttAndroidClient implements IMqttAsyncClient {
         }
     }
 
-    class MqttCallbackExtendedAndroid implements MqttCallbackExtended {
+    class MyMqttCallback implements MqttCallbackExtended {
 
         @Override
         public void connectComplete(boolean reconnect, String serverURI) {
             // This is called differently from a normal connect
-
+            traceDebug(TAG, "connectComplete( reconnect:" + reconnect + ", serverURI:" + serverURI + ")");
             if (callback instanceof MqttCallbackExtended) {
                 ((MqttCallbackExtended) callback).connectComplete(reconnect, serverURI);
             }
@@ -1834,8 +1819,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
                             }
 
                             @Override
-                            public void onFailure(IMqttToken asyncActionToken,
-                                                  Throwable exception) {
+                            public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                                 // No action
                             }
                         });
@@ -1846,7 +1830,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
                     }
                 }
             } catch (Exception e) {
-                // ignore it - we've done our best
+                traceException(TAG, e.getMessage(), e);
             }
 
             if (callback != null) {
@@ -1876,7 +1860,7 @@ public class MqttAndroidClient implements IMqttAsyncClient {
 
                     // let the service discard the saved message details
                 } catch (Exception e) {
-                    // Swallow the exception
+                    traceException(TAG, e.getMessage(), e);
                 }
             }
         }
@@ -1885,22 +1869,9 @@ public class MqttAndroidClient implements IMqttAsyncClient {
         public void deliveryComplete(IMqttDeliveryToken token) {
             traceDebug(TAG, "deliveryComplete(" + token + ")");
 
-            if (!tokenAndroidMap.containsKey(token.getActionCallback()) || tokenAndroidMap.get(token.getActionCallback()) == null) {
-                traceError(TAG, "savedSendDataMap data error");
+            if (callback != null) {
+                callback.deliveryComplete(token);
             }
-            MqttTokenAndroid androidToken = tokenAndroidMap.get(token.getActionCallback());
-
-            // If I don't know about the MqttTokenAndroid, it's irrelevant
-            if (androidToken != null) {
-
-                androidToken.notifyComplete();
-
-                if (callback != null) {
-                    callback.deliveryComplete(token);
-                }
-            }
-
-            // this notification will have kept the connection alive but send the previously sechudled ping anyway
         }
     }
 }

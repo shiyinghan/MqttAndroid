@@ -7,7 +7,7 @@ android {
     buildToolsVersion build_versions.build_tools
 
     defaultConfig {
-        applicationId "com.shiyinghan.mqttdemo"
+        applicationId "com.shiyinghan.mqtt.demo"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1
@@ -23,6 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -36,9 +37,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation deps.support.v4
-    implementation deps.support.multidex
-
     //support
     implementation deps.support.app_compat
     implementation deps.support.recyclerview
@@ -46,6 +44,8 @@ dependencies {
     implementation deps.support.v4
     implementation deps.support.constraint_layout
     implementation deps.support.fragment
+    implementation deps.support.multidex
+
     //room
     implementation deps.room.runtime
     annotationProcessor deps.room.compiler
