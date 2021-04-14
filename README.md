@@ -21,7 +21,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.shiyinghan:MqttAndroid:1.0.0'
+    implementation 'com.github.shiyinghan:MqttAndroid:1.0.2'
 }
 ```
 

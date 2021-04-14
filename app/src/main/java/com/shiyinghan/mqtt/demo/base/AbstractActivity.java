@@ -1,4 +1,4 @@
-package com.shiyinghan.mqttdemo.base;
+package com.shiyinghan.mqtt.demo.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,9 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.shiyinghan.mqttdemo.R;
-import com.shiyinghan.mqttdemo.event.DummyEvent;
-import com.shiyinghan.mqttdemo.reactivex.RxUtils;
+import com.shiyinghan.mqtt.demo.R;
+import com.shiyinghan.mqtt.demo.event.DummyEvent;
+import com.shiyinghan.mqtt.demo.reactivex.RxUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

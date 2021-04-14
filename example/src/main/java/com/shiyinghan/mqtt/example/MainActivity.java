@@ -206,13 +206,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            mqttClient.subscribe(subscriptionTopic1, qos, new IMqttMessageListener() {
-                @Override
-                public void messageArrived(String topic, MqttMessage message) throws Exception {
-                    // message Arrived!
-                    addToHistory("MessageArrived Topic: " + topic + " Payload: " + new String(message.getPayload()));
-                }
-            });
+//            mqttClient.subscribe(subscriptionTopic1, qos, this,
+//                    new IMqttActionListener() {
+//                        @Override
+//                        public void onSuccess(IMqttToken asyncActionToken) {
+//                            addToHistory("Subscribed!");
+//                        }
+//
+//                        @Override
+//                        public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+//                            addToHistory("Failed to subscribe");
+//                        }
+//                    },
+//                    new IMqttMessageListener() {
+//                        @Override
+//                        public void messageArrived(String topic, MqttMessage message) throws Exception {
+//                            // message Arrived!
+//                            addToHistory("MessageArrived Topic: " + topic + " Payload: " + new String(message.getPayload()));
+//                        }
+//                    });
         } catch (MqttException e) {
             e.printStackTrace();
         }
