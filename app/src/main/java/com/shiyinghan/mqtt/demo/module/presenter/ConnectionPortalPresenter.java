@@ -11,6 +11,7 @@ import com.shiyinghan.mqtt.demo.reactivex.observer.BaseHandleObserver;
 import java.util.List;
 
 import io.reactivex.annotations.NonNull;
+import io.reactivex.observers.DisposableCompletableObserver;
 
 public class ConnectionPortalPresenter extends BasePresenter<ConnectionPortalContract.View>
         implements ConnectionPortalContract.Presenter {
@@ -23,7 +24,7 @@ public class ConnectionPortalPresenter extends BasePresenter<ConnectionPortalCon
 
     @Override
     public void getSubscriptionList(String clientHandle) {
-        addSubscription(mSubscriptionDao.findSubscriptionWithClientHandle(clientHandle), new BaseHandleObserver<List<SubscriptionEntity>>() {
+        addSubscription(mSubscriptionDao.findSubscriptionByClientHandle(clientHandle), new BaseHandleObserver<List<SubscriptionEntity>>() {
             @Override
             public void onNext(@NonNull List<SubscriptionEntity> list) {
                 mView.getSubscriptionListSuccess(list);
@@ -33,6 +34,21 @@ public class ConnectionPortalPresenter extends BasePresenter<ConnectionPortalCon
             public void onError(Throwable e) {
                 super.onError(e);
                 mView.getSubscriptionListFail();
+            }
+        });
+    }
+
+    @Override
+    public void deleteSubscriptionList(String clientHandle) {
+        addSubscription(mSubscriptionDao.deleteSubscriptionByClientHandle(clientHandle), new DisposableCompletableObserver() {
+            @Override
+            public void onComplete() {
+                mView.deleteSubscriptionListSuccess();
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                mView.deleteSubscriptionListFail();
             }
         });
     }

@@ -31,8 +31,11 @@ public interface SubscriptionDao {
     public Observable<List<SubscriptionEntity>> findSubscriptionAll();
 
     @Query("SELECT *  FROM SubscriptionEntity WHERE clientHandle=:clientHandle")
-    public Observable<List<SubscriptionEntity>> findSubscriptionWithClientHandle(String clientHandle);
+    public Observable<List<SubscriptionEntity>> findSubscriptionByClientHandle(String clientHandle);
 
     @Query("SELECT *  FROM SubscriptionEntity WHERE clientHandle=:clientHandle AND topic=:topic")
-    public Single<List<SubscriptionEntity>> findSubscriptionWithClientHandleAndTopic(String clientHandle,String topic);
+    public Single<List<SubscriptionEntity>> findSubscriptionByClientHandleAndTopic(String clientHandle, String topic);
+
+    @Query("DELETE  FROM SubscriptionEntity WHERE clientHandle=:clientHandle")
+    public Completable deleteSubscriptionByClientHandle(String clientHandle);
 }

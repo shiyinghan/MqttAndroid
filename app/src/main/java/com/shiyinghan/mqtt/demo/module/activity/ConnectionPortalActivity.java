@@ -53,6 +53,8 @@ public class ConnectionPortalActivity extends AbstractMvpActivity<ConnectionPort
 
     private FragmentStateAdapter mViewPage2Adapter;
 
+    private boolean isSubscribed = false;
+
     @Override
     protected void initBinding() {
         mBinding = ActivityConnectionPortalBinding.inflate(getLayoutInflater());
@@ -62,6 +64,11 @@ public class ConnectionPortalActivity extends AbstractMvpActivity<ConnectionPort
     @Override
     protected void processLogic() {
         mConnection = (ConnectionEntity) getIntent().getSerializableExtra(Constant.DATA);
+        if (mConnection == null) {
+            finish();
+        }
+
+        setTitle(mConnection.getClientId());
 
         mViewPage2Adapter = new MyFragmentStateAdapter(this);
         mBinding.vpConnectionPortalContent.setAdapter(mViewPage2Adapter);
@@ -96,14 +103,19 @@ public class ConnectionPortalActivity extends AbstractMvpActivity<ConnectionPort
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (mClient != null) {
             try {
                 mClient.disconnect();
             } catch (Exception e) {
                 Log.e(TAG, e.getLocalizedMessage(), e);
             }
+
+            if (mConnection.isCleanSession()) {
+                mPresenter.deleteSubscriptionList(mClient.getClientHandle());
+            }
         }
+
+        super.onDestroy();
     }
 
     @Override
@@ -163,17 +175,33 @@ public class ConnectionPortalActivity extends AbstractMvpActivity<ConnectionPort
 
     @Override
     public void getSubscriptionListSuccess(List<SubscriptionEntity> list) {
-        try {
-            for (SubscriptionEntity entity : list) {
-                mClient.subscribe(entity.getTopic(), entity.getQos());
-            }
-        } catch (MqttException e) {
-            Log.e(TAG, e.getMessage(), e);
-        }
+//        if (!isSubscribed) {
+//            if (!mConnection.isCleanSession()) {
+//                try {
+//                    for (SubscriptionEntity entity : list) {
+//                        mClient.subscribe(entity.getTopic(), entity.getQos());
+//                    }
+//                } catch (MqttException e) {
+//                    Log.e(TAG, e.getMessage(), e);
+//                }
+//            }
+//
+//            isSubscribed = true;
+//        }
     }
 
     @Override
     public void getSubscriptionListFail() {
+    }
+
+    @Override
+    public void deleteSubscriptionListSuccess() {
+
+    }
+
+    @Override
+    public void deleteSubscriptionListFail() {
+
     }
 
     private void showConnectingView(boolean isShow) {

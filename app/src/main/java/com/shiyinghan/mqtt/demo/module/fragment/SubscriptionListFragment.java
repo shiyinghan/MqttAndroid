@@ -174,18 +174,6 @@ public class SubscriptionListFragment extends AbstractMvpFragment<SubscriptionLi
                     ToastUtil.show(getString(R.string.toast_subscribe_failed, entity.getTopic()));
                 }
             });
-
-            mClient.subscribe(entity.getTopic() + "2", entity.getQos(), this, new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    ToastUtil.show(getString(R.string.toast_subscribe_success, entity.getTopic()));
-                }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    ToastUtil.show(getString(R.string.toast_subscribe_failed, entity.getTopic()));
-                }
-            });
         } catch (MqttException e) {
             Log.e(TAG, e.getMessage(), e);
         }
@@ -199,22 +187,22 @@ public class SubscriptionListFragment extends AbstractMvpFragment<SubscriptionLi
     @Override
     public void deleteSubscriptionSuccess(SubscriptionEntity entity) {
         mPresenter.getSubscriptionList(mClient.getClientHandle());
-        try {
-            mClient.unsubscribe(entity.getTopic(), this, new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    ToastUtil.show(getString(R.string.toast_unsubscribe_success, entity.getTopic()));
-                }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.e(TAG, exception.getLocalizedMessage(), exception);
-                    ToastUtil.show(getString(R.string.toast_unsubscribe_failed, entity.getTopic()));
-                }
-            });
-        } catch (MqttException e) {
-            Log.e(TAG, e.getMessage(), e);
-        }
+//        try {
+//            mClient.unsubscribe(entity.getTopic(), this, new IMqttActionListener() {
+//                @Override
+//                public void onSuccess(IMqttToken asyncActionToken) {
+//                    ToastUtil.show(getString(R.string.toast_unsubscribe_success, entity.getTopic()));
+//                }
+//
+//                @Override
+//                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+//                    Log.e(TAG, exception.getLocalizedMessage(), exception);
+//                    ToastUtil.show(getString(R.string.toast_unsubscribe_failed, entity.getTopic()));
+//                }
+//            });
+//        } catch (MqttException e) {
+//            Log.e(TAG, e.getMessage(), e);
+//        }
     }
 
     @Override

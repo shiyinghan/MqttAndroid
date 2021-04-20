@@ -5,7 +5,7 @@ android {
     buildToolsVersion build_versions.build_tools
 
     defaultConfig {
-        applicationId "com.shiyinghan.mqtt.examle"
+        applicationId "com.shiyinghan.mqtt.example"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1

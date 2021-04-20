@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import io.reactivex.annotations.NonNull;
+import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 
 public class MqttClientFactory {
@@ -49,6 +50,22 @@ public class MqttClientFactory {
             sClientMap.put(connectionEntity, client);
         }
         return client;
+    }
+
+    public static void clearClient(Context context, ConnectionEntity connectionEntity) {
+        MqttAndroidClient client = getClient(context, connectionEntity);
+        RxUtils.addSubscription(MqttDatabase.getInstance(context).getSubscriptionDao().deleteSubscriptionByClientHandle(client.getClientHandle()), new DisposableCompletableObserver() {
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        });
+        sClientMap.remove(connectionEntity);
     }
 
     public static MqttConnectOptions getConnectOptions(ConnectionEntity entity) {
@@ -114,7 +131,7 @@ public class MqttClientFactory {
             ReceivedMessageEntity receivedMessage = new ReceivedMessageEntity(mClientHandle, topic, message);
             EventBus.getDefault().postSticky(new MessageArrivedEvent(receivedMessage));
 
-            RxUtils.addSubscription(mSubscriptionDao.findSubscriptionWithClientHandleAndTopic(mClientHandle, topic), new DisposableSingleObserver<List<SubscriptionEntity>>() {
+            RxUtils.addSubscription(mSubscriptionDao.findSubscriptionByClientHandleAndTopic(mClientHandle, topic), new DisposableSingleObserver<List<SubscriptionEntity>>() {
                 @Override
                 public void onSuccess(@NonNull List<SubscriptionEntity> list) {
                     if (list.size() == 0) {

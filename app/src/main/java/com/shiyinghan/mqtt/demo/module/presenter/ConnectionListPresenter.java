@@ -2,6 +2,7 @@ package com.shiyinghan.mqtt.demo.module.presenter;
 
 import com.shiyinghan.mqtt.demo.base.presenter.BasePresenter;
 import com.shiyinghan.mqtt.demo.common.MyApplication;
+import com.shiyinghan.mqtt.demo.mqtt.MqttClientFactory;
 import com.shiyinghan.mqtt.demo.mqtt.MqttDatabase;
 import com.shiyinghan.mqtt.demo.mqtt.entity.ConnectionEntity;
 import com.shiyinghan.mqtt.demo.module.contract.ConnectionListContract;
@@ -42,6 +43,8 @@ public class ConnectionListPresenter extends BasePresenter<ConnectionListContrac
             @Override
             public void onComplete() {
                 mView.deleteConnectionSuccess();
+
+//                MqttClientFactory.clearClient(MyApplication.getInstance(), connectionEntity);
             }
 
             @Override

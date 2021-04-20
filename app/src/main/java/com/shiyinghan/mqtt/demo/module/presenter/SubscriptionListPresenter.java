@@ -26,7 +26,7 @@ public class SubscriptionListPresenter extends BasePresenter<SubscriptionListCon
 
     @Override
     public void getSubscriptionList(String clientHandle) {
-        addSubscription(mSubscriptionDao.findSubscriptionWithClientHandle(clientHandle), new BaseHandleObserver<List<SubscriptionEntity>>() {
+        addSubscription(mSubscriptionDao.findSubscriptionByClientHandle(clientHandle), new BaseHandleObserver<List<SubscriptionEntity>>() {
             @Override
             public void onNext(@NonNull List<SubscriptionEntity> list) {
                 mView.getSubscriptionListSuccess(list);
@@ -42,7 +42,7 @@ public class SubscriptionListPresenter extends BasePresenter<SubscriptionListCon
 
     @Override
     public void saveSubscription(SubscriptionEntity entity) {
-        addSubscription(mSubscriptionDao.findSubscriptionWithClientHandleAndTopic(
+        addSubscription(mSubscriptionDao.findSubscriptionByClientHandleAndTopic(
                 entity.getClientHandle(), entity.getTopic()), new DisposableSingleObserver<List<SubscriptionEntity>>() {
             @Override
             public void onSuccess(@NonNull List<SubscriptionEntity> list) {
