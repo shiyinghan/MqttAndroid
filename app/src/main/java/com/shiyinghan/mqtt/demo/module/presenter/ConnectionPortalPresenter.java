@@ -12,6 +12,7 @@ import java.util.List;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableCompletableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
 
 public class ConnectionPortalPresenter extends BasePresenter<ConnectionPortalContract.View>
         implements ConnectionPortalContract.Presenter {
@@ -24,15 +25,14 @@ public class ConnectionPortalPresenter extends BasePresenter<ConnectionPortalCon
 
     @Override
     public void getSubscriptionList(String clientHandle) {
-        addSubscription(mSubscriptionDao.findSubscriptionByClientHandle(clientHandle), new BaseHandleObserver<List<SubscriptionEntity>>() {
+        addSubscription(mSubscriptionDao.findSubscriptionByClientHandle(clientHandle), new DisposableSingleObserver<List<SubscriptionEntity>>() {
             @Override
-            public void onNext(@NonNull List<SubscriptionEntity> list) {
-                mView.getSubscriptionListSuccess(list);
+            public void onSuccess(@NonNull List<SubscriptionEntity> subscriptionEntities) {
+                mView.getSubscriptionListSuccess(subscriptionEntities);
             }
 
             @Override
-            public void onError(Throwable e) {
-                super.onError(e);
+            public void onError(@NonNull Throwable e) {
                 mView.getSubscriptionListFail();
             }
         });

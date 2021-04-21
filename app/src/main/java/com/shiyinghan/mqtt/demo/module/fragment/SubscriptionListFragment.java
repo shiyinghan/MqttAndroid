@@ -90,7 +90,7 @@ public class SubscriptionListFragment extends AbstractMvpFragment<SubscriptionLi
         initRecyclerList();
 
         setLoadingVisible(true);
-        mPresenter.getSubscriptionList(mClient.getClientHandle());
+        mPresenter.getSubscriptionListObservable(mClient.getClientHandle());
     }
 
     private void initListeners() {
@@ -149,19 +149,18 @@ public class SubscriptionListFragment extends AbstractMvpFragment<SubscriptionLi
     }
 
     @Override
-    public void getSubscriptionListSuccess(List<SubscriptionEntity> list) {
+    public void getSubscriptionListObservableSuccess(List<SubscriptionEntity> list) {
         setLoadingVisible(false);
         mListAdapter.setNewInstance(list);
     }
 
     @Override
-    public void getSubscriptionListFail() {
+    public void getSubscriptionListObservableFail() {
         setLoadingVisible(false);
     }
 
     @Override
     public void saveSubscriptionSuccess(SubscriptionEntity entity) {
-        mPresenter.getSubscriptionList(mClient.getClientHandle());
         try {
             mClient.subscribe(entity.getTopic(), entity.getQos(), this, new IMqttActionListener() {
                 @Override
@@ -186,27 +185,26 @@ public class SubscriptionListFragment extends AbstractMvpFragment<SubscriptionLi
 
     @Override
     public void deleteSubscriptionSuccess(SubscriptionEntity entity) {
-        mPresenter.getSubscriptionList(mClient.getClientHandle());
-//        try {
-//            mClient.unsubscribe(entity.getTopic(), this, new IMqttActionListener() {
-//                @Override
-//                public void onSuccess(IMqttToken asyncActionToken) {
-//                    ToastUtil.show(getString(R.string.toast_unsubscribe_success, entity.getTopic()));
-//                }
-//
-//                @Override
-//                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-//                    Log.e(TAG, exception.getLocalizedMessage(), exception);
-//                    ToastUtil.show(getString(R.string.toast_unsubscribe_failed, entity.getTopic()));
-//                }
-//            });
-//        } catch (MqttException e) {
-//            Log.e(TAG, e.getMessage(), e);
-//        }
+        try {
+            mClient.unsubscribe(entity.getTopic(), this, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    ToastUtil.show(getString(R.string.toast_unsubscribe_success, entity.getTopic()));
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    Log.e(TAG, exception.getLocalizedMessage(), exception);
+                    ToastUtil.show(getString(R.string.toast_unsubscribe_failed, entity.getTopic()));
+                }
+            });
+        } catch (MqttException e) {
+            Log.e(TAG, e.getMessage(), e);
+        }
     }
 
     @Override
     public void deleteSubscriptionFail() {
-        mPresenter.getSubscriptionList(mClient.getClientHandle());
+        mPresenter.getSubscriptionListObservable(mClient.getClientHandle());
     }
 }

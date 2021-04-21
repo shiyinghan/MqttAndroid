@@ -25,19 +25,21 @@ public class SubscriptionListPresenter extends BasePresenter<SubscriptionListCon
     }
 
     @Override
-    public void getSubscriptionList(String clientHandle) {
-        addSubscription(mSubscriptionDao.findSubscriptionByClientHandle(clientHandle), new BaseHandleObserver<List<SubscriptionEntity>>() {
-            @Override
-            public void onNext(@NonNull List<SubscriptionEntity> list) {
-                mView.getSubscriptionListSuccess(list);
-            }
+    public void getSubscriptionListObservable(String clientHandle) {
+        addSubscription(
+                mSubscriptionDao.observeSubscriptionByClientHandle(clientHandle).distinctUntilChanged(),
+                new BaseHandleObserver<List<SubscriptionEntity>>() {
+                    @Override
+                    public void onNext(@NonNull List<SubscriptionEntity> list) {
+                        mView.getSubscriptionListObservableSuccess(list);
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                super.onError(e);
-                mView.getSubscriptionListFail();
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        mView.getSubscriptionListObservableFail();
+                    }
+                });
     }
 
     @Override

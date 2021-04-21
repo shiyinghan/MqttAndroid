@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SubscriptionListContract {
     interface Presenter {
-        void getSubscriptionList(String clientHandle);
+        void getSubscriptionListObservable(String clientHandle);
 
         void saveSubscription(SubscriptionEntity entity);
 
@@ -14,9 +14,9 @@ public interface SubscriptionListContract {
     }
 
     interface View {
-        void getSubscriptionListSuccess(List<SubscriptionEntity> list);
+        void getSubscriptionListObservableSuccess(List<SubscriptionEntity> list);
 
-        void getSubscriptionListFail();
+        void getSubscriptionListObservableFail();
 
         void saveSubscriptionSuccess(SubscriptionEntity entity);
 

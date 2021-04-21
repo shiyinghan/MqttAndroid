@@ -53,8 +53,6 @@ public class ConnectionPortalActivity extends AbstractMvpActivity<ConnectionPort
 
     private FragmentStateAdapter mViewPage2Adapter;
 
-    private boolean isSubscribed = false;
-
     @Override
     protected void initBinding() {
         mBinding = ActivityConnectionPortalBinding.inflate(getLayoutInflater());
@@ -135,7 +133,11 @@ public class ConnectionPortalActivity extends AbstractMvpActivity<ConnectionPort
             mClient.connect(mOptions, this, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    mPresenter.getSubscriptionList(mClient.getClientHandle());
+                    if (mConnection.isCleanSession()) {
+                        mPresenter.deleteSubscriptionList(mClient.getClientHandle());
+                    } else {
+                        mPresenter.getSubscriptionList(mClient.getClientHandle());
+                    }
 
                     showConnectingView(false);
                     showConnectionStatus();
@@ -158,12 +160,20 @@ public class ConnectionPortalActivity extends AbstractMvpActivity<ConnectionPort
             mClient.disconnect(this, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
+                    if (mConnection.isCleanSession()) {
+                        mPresenter.deleteSubscriptionList(mClient.getClientHandle());
+                    }
+
                     showConnectingView(false);
                     showConnectionStatus();
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    if (mConnection.isCleanSession()) {
+                        mPresenter.deleteSubscriptionList(mClient.getClientHandle());
+                    }
+
                     showConnectingView(false);
                     showConnectionStatus();
                 }
@@ -175,19 +185,40 @@ public class ConnectionPortalActivity extends AbstractMvpActivity<ConnectionPort
 
     @Override
     public void getSubscriptionListSuccess(List<SubscriptionEntity> list) {
-//        if (!isSubscribed) {
-//            if (!mConnection.isCleanSession()) {
-//                try {
-//                    for (SubscriptionEntity entity : list) {
-//                        mClient.subscribe(entity.getTopic(), entity.getQos());
-//                    }
-//                } catch (MqttException e) {
-//                    Log.e(TAG, e.getMessage(), e);
-//                }
-//            }
-//
-//            isSubscribed = true;
-//        }
+        if (list.size() == 0) {
+            return;
+        }
+
+        String[] topicArray = new String[list.size()];
+        int[] qosArray = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            topicArray[i] = list.get(i).getTopic();
+            qosArray[i] = list.get(i).getQos();
+        }
+
+        try {
+            mClient.unsubscribe(topicArray, this, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    subscribeTopics(topicArray, qosArray);
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    subscribeTopics(topicArray, qosArray);
+                }
+            });
+        } catch (MqttException e) {
+            Log.e(TAG, e.getMessage(), e);
+        }
+    }
+
+    private void subscribeTopics(String[] topicArray, int[] qosArray) {
+        try {
+            mClient.subscribe(topicArray, qosArray);
+        } catch (MqttException e) {
+            Log.e(TAG, e.getMessage(), e);
+        }
     }
 
     @Override

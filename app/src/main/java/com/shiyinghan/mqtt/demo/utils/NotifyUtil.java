@@ -13,6 +13,8 @@ import androidx.core.app.NotificationCompat;
 
 import com.shiyinghan.mqtt.demo.R;
 
+import java.util.Random;
+
 
 /**
  * Provides static methods for creating and showing notifications to the user.
@@ -79,9 +81,11 @@ public class NotifyUtil {
         //the message that will be displayed as the ticker
         String ticker = contentTitle + " " + messageString;
 
+        // use different requestCode to make PendingIntent independent
+        int requestCode = new Random().nextInt();
         //build the pending intent that will start the appropriate activity
         PendingIntent pendingIntent = PendingIntent.getActivity(context,
-                0, intent, 0);
+                requestCode, intent, 0);
 
         //build the notification
         NotificationCompat.Builder notificationCompat = new NotificationCompat.Builder(context, sNotificationChannelId);
